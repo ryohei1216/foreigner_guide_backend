@@ -1,6 +1,7 @@
 module foreigner_guide
 
-go 1.17
+// +heroku goVersion go1.16
+go 1.16
 
 require (
 	github.com/GoogleCloudPlatform/cloudsql-proxy v1.27.0
