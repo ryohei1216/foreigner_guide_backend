@@ -31,6 +31,7 @@ func Init() {
     }))
 
     router.POST("/userCreate", Signup)
+    router.POST("/signin", Signin)
     
     router.Run(":" + os.Getenv("PORT"))
 }

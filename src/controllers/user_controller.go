@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"foreigner_guide/src/models"
+	"log"
 	"math/rand"
 	"net/http"
 
@@ -32,4 +33,19 @@ func Signup(c *gin.Context) {
 		"create_user": "success",
 	})
 
+}
+
+func Signin(c *gin.Context){
+	var user models.User
+	err := c.BindJSON(&user)
+	if err != nil {
+		log.Println(err)
+	}
+	getUser, err := user.GetUser()
+	if err != nil {
+		log.Println(err)
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"getUser": getUser,
+	})
 }
