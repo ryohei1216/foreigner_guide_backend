@@ -32,6 +32,7 @@ func Init() {
 
     router.POST("/userCreate", Signup)
     router.POST("/signin", Signin)
+    router.GET("/country", GetCountryImages)
     
     router.Run(":" + os.Getenv("PORT"))
 }
