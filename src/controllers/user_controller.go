@@ -35,7 +35,7 @@ func Signup(c *gin.Context) {
 
 }
 
-func Signin(c *gin.Context){
+func SignIn(c *gin.Context){
 	var user models.User
 	err := c.BindJSON(&user)
 	if err != nil {
