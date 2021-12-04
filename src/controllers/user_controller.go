@@ -18,7 +18,7 @@ func RandomString(n int) string {
     return string(b)
 }
 
-func Signup(c *gin.Context) {
+func CreateUser(c *gin.Context) {
 	var user models.User
 	user.Id = RandomString(10)
 	c.BindJSON(&user)
@@ -35,7 +35,7 @@ func Signup(c *gin.Context) {
 
 }
 
-func SignIn(c *gin.Context){
+func GetUser(c *gin.Context){
 	var user models.User
 	err := c.BindJSON(&user)
 	if err != nil {

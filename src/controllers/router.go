@@ -30,9 +30,11 @@ func Init() {
         },
     }))
 
-    router.POST("/userCreate", Signup)
-    router.POST("/signIn", SignIn)
+    router.POST("/signUp", CreateUser)
+    router.POST("/signIn", GetUser)
     router.GET("/country", GetCountryImages)
+    router.GET("/country_wiki", GetCountryWiki)
     
     router.Run(":" + os.Getenv("PORT"))
+    // router.Run(":8080")
 }
