@@ -8,6 +8,7 @@ type User struct {
 	LastName  string	`json:"lastName"`
 	Email     string	`json:"email"`
 	Password  string	`json:"password"`
+	Area		  string  `json:"area"`
 }
 
 func (u *User) Create() (err error) {
@@ -15,9 +16,16 @@ func (u *User) Create() (err error) {
 	return db.Create(u).Error
 }
 
-
-func ( u *User) GetUser() (user User, err error) {
+func (u *User) Get() (user User, err error) {
 	db := database.Db
+	user = User{}
 	err = db.Where("email = ? AND password = ?", u.Email, u.Password).Find(&user).Error
 	return user, err
+}
+
+func (u *User) GetByArea() (users []User, err error) {
+	db := database.Db
+	users = []User{}
+	err = db.Where("area = ?", u.Area).Find(&users).Error
+	return users, err
 }
