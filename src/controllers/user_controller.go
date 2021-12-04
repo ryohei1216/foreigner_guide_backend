@@ -36,16 +36,30 @@ func CreateUser(c *gin.Context) {
 }
 
 func GetUser(c *gin.Context){
-	var user models.User
+	user := models.User{}
 	err := c.BindJSON(&user)
 	if err != nil {
 		log.Println(err)
 	}
-	getUser, err := user.GetUser()
+	getUser, err := user.Get()
 	if err != nil {
 		log.Println(err)
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"getUser": getUser,
+	})
+}
+
+func GetUsersByArea (c *gin.Context) {
+	area := c.Query("area")
+	modelUser := models.User{
+		Area: area,
+	}
+	users, err := modelUser.GetByArea()
+	if err != nil {
+		log.Println(err)
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"users": users,
 	})
 }
