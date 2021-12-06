@@ -31,7 +31,7 @@ func Init() {
     }))
 
     router.POST("/signUp", CreateUser)
-    router.POST("/signIn", GetUser)
+    router.POST("/signIn", GetSignInUser)
     router.GET("/country", GetCountryImages)
     router.GET("/country_wiki", GetCountryWiki)
     router.GET("/users_area", GetUsersByArea)
