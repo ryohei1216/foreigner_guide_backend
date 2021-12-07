@@ -1,8 +1,6 @@
 package controllers
 
 import (
-	"os"
-
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -36,6 +34,6 @@ func Init() {
     router.GET("/country_wiki", GetCountryWiki)
     router.GET("/users_area", GetUsersByArea)
     
-    router.Run(":" + os.Getenv("PORT"))
-    // router.Run(":8080")
+    // router.Run(":" + os.Getenv("PORT"))
+    router.Run(":8080")
 }

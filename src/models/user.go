@@ -1,14 +1,16 @@
 package models
 
-import "foreigner_guide/src/database"
-
+import (
+	"foreigner_guide/src/database"
+)
 type User struct {
-	Id        string  `json:"id"`
-	FirstName string  `json:"firstName"`
-	LastName  string	`json:"lastName"`
-	Email     string	`json:"email"`
-	Password  string	`json:"password"`
-	Area		  string  `json:"area"`
+	Id        string `json:"id"` 
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Email     string `json:"email"`
+	Password  string `json:"password"`
+	Country   string `json:"country"`
+	Area      string `json:"area"`
 }
 
 func (u *User) Create() (err error) {
