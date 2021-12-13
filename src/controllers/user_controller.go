@@ -49,6 +49,20 @@ func GetAllUsers(c *gin.Context) {
 	})
 }
 
+func GetUserById (c *gin.Context) {
+	id := c.Query("id")
+	user := models.User{
+		Id: id,
+	}
+	user, err := user.GetById()
+	if err != nil {
+		log.Println(err)
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"user": user,
+	})
+}
+
 func GetSignInUser(c *gin.Context) {
 	user := models.User{}
 	err := c.BindJSON(&user)

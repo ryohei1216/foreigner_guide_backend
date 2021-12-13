@@ -14,7 +14,6 @@ type User struct {
 	Password  string `json:"password"`
 	Country   string `json:"country"`
 	Area      string `json:"area"`
-	Image     string `json:image`
 }
 
 func (u *User) Create() (err error) {
@@ -48,6 +47,13 @@ func GetAll() (users []User, err error) {
 	users = []User{}
 	err = db.Find(&users).Error
 	return users, err
+}
+
+func (u *User) GetById() (user User, err error) {
+	db := database.Db
+	user = User{}
+	err = db.Where("id = ?", u.Id).Find(&user).Error
+	return user, err
 }
 
 func (u *User) GetBySignIn() (user User, err error) {
