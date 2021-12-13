@@ -7,7 +7,7 @@ import (
 func Init() {
 	db := database.Db
 	//DBリセット時にコメント外す
-	// db.Migrator().DropTable(&models.User{})
+	db.Migrator().DropTable(&models.User{})
 	db.AutoMigrate(&models.User{})
-	
+
 }
