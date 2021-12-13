@@ -36,7 +36,11 @@ func Init() {
 	router.GET("/country_wiki", GetCountryWiki)
 	router.GET("/users", GetAllUsers)
 	router.GET("/users_area", GetUsersByArea)
+	router.GET("/users_apply", GetApplyUsers)
+	router.POST("/getMessages", GetMessages)
 	router.POST("/uploadImage", UploadImage)
+	router.POST("/applyMatch", SaveApplyUser)
+	router.POST("/saveMessages", SaveMessages)
 
 	router.Run(":" + os.Getenv("PORT"))
 	// router.Run(":8080")

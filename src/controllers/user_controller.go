@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"foreigner_guide/src/database"
 	"foreigner_guide/src/models"
 	"log"
 	"math/rand"
@@ -9,8 +10,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+var db = database.Db
+
+
 func RandomString(n int) string {
-	var letter = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+	var letter = []rune("abcdefghijklmnopqrstuvwxyz0123456789")
 	b := make([]rune, n)
 	for i := range b {
 		b[i] = letter[rand.Intn(len(letter))]
@@ -20,7 +24,7 @@ func RandomString(n int) string {
 
 func CreateUser(c *gin.Context) {
 	var user models.User
-	user.Id = RandomString(10)
+	user.Id = RandomString(5)
 	c.BindJSON(&user)
 
 	err := user.Create()
@@ -73,3 +77,29 @@ func GetUsersByArea(c *gin.Context) {
 		"users": users,
 	})
 }
+
+func SaveApplyUser (c *gin.Context) {
+	type ApplyUser struct {
+		UserId 	string
+		GuideId string
+		Status  string
+	}
+	applyUser := ApplyUser{}
+	c.BindJSON(&applyUser)
+	//userの申請ユーザーリストDBに挿入
+	db.Table("apply_user_list"+applyUser.UserId).Create(&applyUser)
+	db.Table("applied_user_list"+applyUser.GuideId).Create(&applyUser)
+}
+
+func GetApplyUsers (c *gin.Context) {
+	id := c.Query("id")
+	u := models.User{Id: id}
+	users, err := u.GetByApply()
+	if err != nil {
+		log.Println(err)
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"users": users,
+	})
+}
+ 

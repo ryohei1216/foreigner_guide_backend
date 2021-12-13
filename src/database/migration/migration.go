@@ -9,5 +9,5 @@ func Init() {
 	//DBリセット時にコメント外す
 	db.Migrator().DropTable(&models.User{})
 	db.AutoMigrate(&models.User{})
-	
+
 }
